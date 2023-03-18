@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"io"
 
-	"github.com/faiface/beep"
+	"github.com/brotholo/beep"
 	gomp3 "github.com/hajimehoshi/go-mp3"
 	"github.com/pkg/errors"
 )

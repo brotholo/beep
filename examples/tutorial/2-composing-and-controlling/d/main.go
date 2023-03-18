@@ -6,10 +6,10 @@ import (
 	"os"
 	"time"
 
-	"github.com/faiface/beep"
-	"github.com/faiface/beep/effects"
-	"github.com/faiface/beep/mp3"
-	"github.com/faiface/beep/speaker"
+	"github.com/brotholo/beep"
+	"github.com/brotholo/beep/effects"
+	"github.com/brotholo/beep/mp3"
+	"github.com/brotholo/beep/speaker"
 )
 
 func main() {
