@@ -117,7 +117,8 @@ func StartEncodePerpertum(
 	ask_ch *chan bool,
 	rbuff_ch *chan []byte,
 	rtext_ch *chan string,
-	stop_ch *chan bool) bool {
+	stop_ch *chan bool,
+	debug_file bool) bool {
 
 	ep := EncodePerpetum{}
 	ep.s = s
@@ -130,7 +131,7 @@ func StartEncodePerpertum(
 		return false
 	}
 	//  ep.StartNoSilence()
-	ep.StartWithDetect()
+	ep.StartWithDetect(debug_file)
 	return false
 }
 func (ep *EncodePerpetum) NewFile(filename string) *os.File {
