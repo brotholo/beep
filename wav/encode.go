@@ -100,15 +100,16 @@ func Encode(w io.WriteSeeker, s beep.Streamer, format beep.Format) (err error) {
 }
 
 type EncodePerpetum struct {
-	s        beep.Streamer
-	format   beep.Format
-	ask_ch   *chan bool
-	rbuff_ch *chan []byte
-	rtext_ch *chan string
-	stop_ch  *chan bool
-	headers  *header
-	buff     *bytes.Buffer
-	file     *io.WriteSeeker
+	s           beep.Streamer
+	format      beep.Format
+	ask_ch      *chan bool
+	rbuff_ch    *chan []byte
+	rtext_ch    *chan string
+	stop_ch     *chan bool
+	wakeup_time int
+	headers     *header
+	buff        *bytes.Buffer
+	file        *io.WriteSeeker
 }
 
 func StartEncodePerpertum(
@@ -118,6 +119,7 @@ func StartEncodePerpertum(
 	rbuff_ch *chan []byte,
 	rtext_ch *chan string,
 	stop_ch *chan bool,
+	wakeup_time int,
 	debug_file bool) bool {
 
 	ep := EncodePerpetum{}
@@ -127,6 +129,7 @@ func StartEncodePerpertum(
 	ep.rbuff_ch = rbuff_ch
 	ep.rtext_ch = rtext_ch
 	ep.stop_ch = stop_ch
+	ep.wakeup_time = wakeup_time
 	if !ep.EncodeSetup() {
 		return false
 	}
@@ -354,7 +357,7 @@ func (ep *EncodePerpetum) StartWithDetect(debug_audio_file bool) {
 	long_buff, tbw, twritten := ep.NewBuff()
 	filename := "debug_wav"
 	fn_count := 0
-	wakeUp := InitWakeUp(60)
+	wakeUp := InitWakeUp(ep.wakeup_time)
 	for {
 		samples, nsamples := ep.ReadSamples()
 		if samples == nil {
