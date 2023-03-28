@@ -17,7 +17,6 @@ import (
 // Encode writes all audio streamed from s to w in WAVE format.
 //
 // Format precision must be 1 or 2 bytes.
-
 func Encode(w io.WriteSeeker, s beep.Streamer, format beep.Format) (err error) {
 	defer func() {
 		if err != nil {

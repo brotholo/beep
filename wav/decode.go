@@ -16,6 +16,7 @@ import (
 //
 // Do not close the supplied Reader, instead, use the Close method of the returned
 // StreamSeekCloser when you want to release the resources.
+
 func Decode(r io.Reader) (s beep.StreamSeekCloser, format beep.Format, err error) {
 	d := decoder{r: r}
 	defer func() { // hacky way to always close r if an error occurred
