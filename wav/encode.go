@@ -1,4 +1,4 @@
-package wav
+package github.com/brotholo/beep/wav
 
 import (
 	"bufio"
